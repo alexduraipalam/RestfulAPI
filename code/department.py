@@ -16,6 +16,16 @@ mysql.init_app(app)
 
 api = Api(app)
 
+port = 5001
+env = "test"
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        env = sys.argv[1]
+        print("env=" + env)
+    if len(sys.argv) > 2:
+        port = sys.argv[2]
+        print("port=" + port)
+
 
 class Department(Resource):
     def get(self, dept_id):
@@ -59,11 +69,5 @@ class Departments(Resource):
 
 api.add_resource(Department, '/department/<int:dept_id>')
 api.add_resource(Departments, '/departments')
-
-port = 5001
-if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        port = sys.argv[1]
-        print("port=" + port)
 
 app.run(port=port)

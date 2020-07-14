@@ -6,10 +6,20 @@ import sys
 mysql = MySQL()
 app = Flask(__name__)
 
+port = 4001
+env = "test"
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        env = sys.argv[1]
+        print("env=" + env)
+    if len(sys.argv) > 2:
+        port = sys.argv[2]
+        print("port=" + port)
+
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'welcome1'
-app.config['MYSQL_DATABASE_DB'] = 'test'
+app.config['MYSQL_DATABASE_DB'] = env
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
 mysql.init_app(app)
@@ -74,10 +84,5 @@ class Students(Resource):
 api.add_resource(Student, '/student/<int:student_id>')
 api.add_resource(Students, '/students')
 
-port = 4001
-if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        port = sys.argv[1]
-        print("port=" + port)
 
 app.run(port=port)
