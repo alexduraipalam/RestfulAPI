@@ -6,17 +6,7 @@ import sys
 mysql = MySQL()
 app = Flask(__name__)
 
-# MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'welcome1'
-app.config['MYSQL_DATABASE_DB'] = 'test'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-
-mysql.init_app(app)
-
-api = Api(app)
-
-port = 5001
+port = 4003
 env = "test"
 if __name__ == "__main__":
     if len(sys.argv) > 1:
@@ -25,6 +15,16 @@ if __name__ == "__main__":
     if len(sys.argv) > 2:
         port = sys.argv[2]
         print("port=" + port)
+
+# MySQL configurations
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'welcome1'
+app.config['MYSQL_DATABASE_DB'] = env
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+
+mysql.init_app(app)
+
+api = Api(app)
 
 
 class Department(Resource):
