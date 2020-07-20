@@ -33,7 +33,7 @@ class Department(Resource):
         cursor = conn.cursor()
         if dept_id > 0:
             select_query = "select * from departments where  dept_id = " + str(dept_id)
-        else
+        else:
             select_query = "select max(dept_id) from departments"
         cursor.execute(select_query)
         rows = cursor.fetchall()
