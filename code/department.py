@@ -31,10 +31,7 @@ class Department(Resource):
     def get(self, dept_id):
         conn = mysql.connect()
         cursor = conn.cursor()
-        if dept_id > 0:
-            select_query = "select * from departments where  dept_id = " + str(dept_id)
-        else:
-            select_query = "select max(dept_id) from departments"
+        select_query = "select * from departments where  dept_id = " + str(dept_id)
         cursor.execute(select_query)
         rows = cursor.fetchall()
         if len(rows) > 0:
